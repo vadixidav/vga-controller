@@ -3,6 +3,8 @@ A VGA controller written in Verilog; can be parameterized to use CVT and any res
 
 By default the module is in 640x480 @ 60Hz with a pixel clock of 25.125MHz.
 
+The `will_display` output indicates that a pixel should be fetched and displayed on the following cycle.
+
 Example of how to use the module:
 
 ```

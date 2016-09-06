@@ -62,20 +62,7 @@ module vga(
             (v_counter < (TIME_VERTICAL_VIDEO + TIME_VERTICAL_FRONT_PORCH + TIME_VERTICAL_SYNC_PULSE))) ?
         VERTICAL_SYNC_POLARITY : ~VERTICAL_SYNC_POLARITY;
 
-    assign will_display =
-        (
-            (
-                (h_counter < (TIME_HORIZONTAL_VIDEO - 1)) &&
-                (v_counter < TIME_VERTICAL_VIDEO)
-            ) ||
-            (
-                (h_counter == (TIME_HORIZONTAL - 1)) &&
-                (
-                    (v_counter < (TIME_VERTICAL_VIDEO - 1)) ||
-                    v_counter == (TIME_VERTICAL - 1)
-                )
-            )
-        );
+    assign will_display = h_counter_next < TIME_HORIZONTAL_VIDEO && v_counter_next < TIME_VERTICAL_VIDEO;
 
     always @* begin
         if (reset) begin
